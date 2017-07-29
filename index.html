@@ -1,12 +1,54 @@
+<!doctype html>
 <html>
-  <header>
-    <meta charset="utf-8" />
-  </header>
-  <body>
-    <h1>Take Me 2 Space</h1>
+<head>
+  <meta charset="UTF-8">
+  <title>Take Me 2 Space</title>
+  <link href="stylesheet.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  </head>
+<body>
+  <div id="logo-container"><h1>Take Me 2 Space</h1></div>
 
-    <div id="weather_api"></div>
-  </body>
+  <div id="form-container">
+    <form class = "input-text">
+      <label>Point A </label><input type = "text" id = "point-a-input"></br></br>
+      <label>Point B </label><input type="text" id = "point-b-input"></br></br>
+
+      <label>Arrival Time </label>
+      <select id = "arrival-options">
+        <option value = "12:00PM">12:00PM</option>
+        <option value = "1:00PM">1:00PM</option>
+      </select>
+    </br></br>
+
+      <label>How Many People</label>
+      <select id = "num-person-options">
+        <option value = "1">1</option>
+        <option value = "2">2</option>
+        <option value = "3">3</option>
+      </select>
+    </br></br>
+
+      <button type="button" id="take-me-there-btn">Take Me There!</button>
+  </form>
+    <hr height="20px" width="50%"></br>
+  </div>
+
+  <div id="result-container">
+    <label>Order By:</label>
+    <select>
+      <option value="Cost">Cost</option>
+      <option value="Emmissions">Emmissions</option>
+      <option value="Time">Time</option>
+    </select>
+
+    <ul align="center" class = "result-list">
+      <li>Option 1</li>
+      <li>Option 2</li>
+    </ul>
+  <div>
+
+  <div id="weather_api"></div>
   <script text="text/javascript">
     var HERE_APP_ID   = "OhyirZysFFjdv8Qzsq2A";
     var HERE_APP_CODE = "TzRKd-0kRlgnZw_mh6bIIA";
@@ -15,4 +57,5 @@
     var WEATHER_APP_CODE = "vdbpJ6m0TAn3xzFySqVajA";
   </script>
   <script src="/script.js"></script>
+</body>
 </html>
