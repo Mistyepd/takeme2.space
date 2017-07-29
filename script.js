@@ -17,14 +17,12 @@ function getLongLat(locationId) {
 }
 
 function getRoute(StartX, StartY, GoalX, GoalY, mode) {
-
   return fetch("https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=" + HERE_APP_ID +
     "&app_code=" + HERE_APP_CODE +
     "&waypoint0=geo!" + StartX + "," + StartY +
     "&waypoint1=geo!" + GoalX + "," + GoalY +
     "&mode=fastest;" + mode + ";traffic:enabled")
-    .then(r => r.json())
-    .then(r => console.log(r));
+    .then(r => r.json());
 }
 
 function weather(name) {
@@ -107,4 +105,49 @@ function updateAutoCompleteFor(event) {
       datalist.parentNode.replaceChild(newData ,datalist);
     });
 
+}
+
+
+function handleGetThere(event) {
+  console.log(event);
+  
+  var aLocation = document.getElementById("point-a-input");
+  var bLocation = document.getElementById("point-b-input");
+
+  console.log(aLocation.value);
+  console.log(bLocation.value);
+
+  var aLocId = getLocationIdFromDataList(aLocation.value, aLocation.getAttribute('list'))
+  var bLocId = getLocationIdFromDataList(bLocation.value, bLocation.getAttribute('list'))
+
+  
+  Promise.all([getLongLat(aLocId), getLongLat(bLocId)])
+    .then(pos => {
+        
+      console.log(pos);
+
+      var aLatLong = pos[0];
+      var bLatLong = pos[1];
+
+
+      var routeReqs = ["car", "publicTransport", "bicycle", "pedestrian"].map(mode =>
+        getRoute(aLatLong.Latitude, aLatLong.Longitude, bLatLong.Latitude, bLatLong.Longitude, mode)); 
+
+      Promise.all(routeReqs)
+        .then(data => console.log(data));
+
+    });
+
+}
+
+
+function getLocationIdFromDataList(location, id) {
+  var datalist = document.getElementById(id);
+  
+  // var selected = datalist.childNodes.find(node => {
+  //   return node.value === location;
+  // });
+  var selected = datalist.firstElementChild;
+
+  return selected.getAttribute('location');
 }
