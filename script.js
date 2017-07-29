@@ -1,5 +1,5 @@
 
-/** 
+/**
  * returns a promise of the resolved location ID to a location object
  */
 function resolveLocationId(locationId) {
@@ -18,7 +18,7 @@ function getLongLat(locationId) {
 
 function getRoute(StartX, StartY, GoalX, GoalY, mode) {
 
-  return fetch("https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=" + HERE_APP_ID + 
+  return fetch("https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=" + HERE_APP_ID +
     "&app_code=" + HERE_APP_CODE +
     "&waypoint0=geo!" + StartX + "," + StartY +
     "&waypoint1=geo!" + GoalX + "," + GoalY +
@@ -28,7 +28,7 @@ function getRoute(StartX, StartY, GoalX, GoalY, mode) {
 }
 
 function weather(name) {
-  
+
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = "https://weather.cit.api.here.com/weather/1.0/report.json?app_id=" + WEATHER_APP_ID +
@@ -74,7 +74,7 @@ function LatLongToMat(lat, long, zoom) {
 function getAutoCompleteFor(search) {
 
   return fetch("http://autocomplete.geocoder.cit.api.here.com/6.2/suggest.json?app_id=" +
-    HERE_APP_ID + "&app_code=" + HERE_APP_CODE + "&query=" + search)
+    HERE_APP_ID + "&app_code=" + HERE_APP_CODE + "&query=" + search + "&country=NZL"  )
     .then(r => r.json());
 }
 
@@ -84,7 +84,7 @@ function updateAutoCompleteFor(event) {
   var value = input.value;
   console.log(value);
 
-  getAutoCompleteFor('New Zealand, ' + value)
+  getAutoCompleteFor(value)
     .then(r => {
       var listId = input.getAttribute('list');
       var datalist = document.getElementById(listId);
