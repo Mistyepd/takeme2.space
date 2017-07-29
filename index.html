@@ -5,48 +5,93 @@
   <title>Take Me 2 Space</title>
   <link href="stylesheet.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-  </head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link href="../css/stylesheet.css" rel="stylesheet">
+</head>
+
 <body>
   <div id="logo-container"><h1>Take Me 2 Space</h1></div>
 
+  <div id = "content-container">
   <div id="form-container">
-    <form class = "input-text">
-      <label>Point A </label><input type = "text" id = "point-a-input"></br></br>
-      <label>Point B </label><input type="text" id = "point-b-input"></br></br>
+    <form>
+      <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point A  &nbsp;</label><input type = "text" id = "point-a-input"></br>
+      <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point B  &nbsp;</label><input type="text" id = "point-b-input"></br></br>
 
-      <label>Arrival Time </label>
-      <select id = "arrival-options">
-        <option value = "12:00PM">12:00PM</option>
-        <option value = "1:00PM">1:00PM</option>
-      </select>
+      <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Arrival Time </label>
+      <select id = "arrival-options"></select>
     </br></br>
 
-      <label>How Many People</label>
+      <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span> How Many People? </label>
       <select id = "num-person-options">
         <option value = "1">1</option>
         <option value = "2">2</option>
         <option value = "3">3</option>
+        <option value = "4">4</option>
+        <option value = "5">5</option>
+        <option value = "6">6</option>
+        <option value = "7">7</option>
+        <option value = "8">8</option>
       </select>
     </br></br>
 
-      <button type="button" id="take-me-there-btn">Take Me There!</button>
+      <button type="button" id="take-me-there-btn">Take Me There!</button></form></br></br>
   </form>
-    <hr height="20px" width="50%"></br>
   </div>
 
   <div id="result-container">
-    <label>Order By:</label>
+    <label>Order By </label>
     <select>
       <option value="Cost">Cost</option>
       <option value="Emmissions">Emmissions</option>
       <option value="Time">Time</option>
-    </select>
+    </select></br></br>
 
-    <ul align="center" class = "result-list">
-      <li>Option 1</li>
-      <li>Option 2</li>
-    </ul>
+
+    <div class = "result-list">
+        <p><img src="bus.png" width ="150px" height ="150px"></p>
+        <p>Time travel</p>
+        <p>Cost</p>
+        <p>Information 3</p>
+        <p>Information 4</p>
+        <p>Information 5</p>
+    </div>
+
+
+    <div class = "result-list">
+        <p><img src="bike.png" width ="150px" height ="150px"></p>
+        <p>Time travel</p>
+        <p>Cost</p>
+        <p>Information 3</p>
+        <p>Information 4</p>
+        <p>Information 5</p>
+    </div>
+
+
+    <div class = "result-list">
+        <p><img src="walk.png" width ="150px" height ="150px"></p>
+        <p>Time travel</p>
+        <p>Cost</p>
+        <p>Information 3</p>
+        <p>Information 4</p>
+        <p>Information 5</p>
+    </div>
+
+    <div class = "result-list">
+        <p><img src="car.png" width ="150px" height ="150px"></p>
+        <p>Time travel</p>
+        <p>Cost</p>
+        <p>Information 3</p>
+        <p>Information 4</p>
+        <p>Information 5</p>
+    </div>
+
+
+
+
   <div>
+  </div>
 
   <div id="weather_api"></div>
   <script text="text/javascript">
@@ -57,5 +102,31 @@
     var WEATHER_APP_CODE = "vdbpJ6m0TAn3xzFySqVajA";
   </script>
   <script src="/script.js"></script>
+  <script>
+
+    // set up the arrival time options
+    var time = new Date();
+    var select = document.getElementById('arrival-options');
+    for (var i = 0; i <= 12; i++){
+        var opt = document.createElement('option');
+        var hour = time.getHours()+i;
+        opt.innerHTML = hour+":00";
+        if (hour >= 24 && hour-24 < 10){
+            opt.value = hour-24;
+            opt.innerHTML = "0"+(hour-24)+":00";
+        } else if (hour > 24 && hour-24 >= 10){
+            opt.value = hour-24;
+            opt.innerHTML = (hour-24)+":00";
+        } else if (hour < 10){
+            opt.value = hour;
+            opt.innerHTML = "0"+(hour)+":00";
+        } else if (hour >= 10 && hour+10 < 24){
+            opt.value = hour;
+            opt.innerHTML = (hour)+":00";
+        }
+        select.appendChild(opt);
+    }
+    console.log(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+  </script>
 </body>
 </html>
