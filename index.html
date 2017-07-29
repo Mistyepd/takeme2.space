@@ -11,8 +11,12 @@
 
   <div id="form-container">
     <form class = "input-text">
-      <label>Point A </label><input type = "text" id = "point-a-input"></br></br>
-      <label>Point B </label><input type="text" id = "point-b-input"></br></br>
+      <label>Point A </label><input type = "text" id = "point-a-input" list="point-a-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
+      <datalist id="point-a-input-list">
+      </datalist>
+      <label>Point B </label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
+      <datalist id="point-b-input-list">
+      </datalist>
 
       <label>Arrival Time </label>
       <select id = "arrival-options">
@@ -46,7 +50,7 @@
       <li>Option 1</li>
       <li>Option 2</li>
     </ul>
-  <div>
+  </div>
 
   <div id="weather_api"></div>
   <script text="text/javascript">

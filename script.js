@@ -77,3 +77,34 @@ function getAutoCompleteFor(search) {
     HERE_APP_ID + "&app_code=" + HERE_APP_CODE + "&query=" + search)
     .then(r => r.json());
 }
+
+function updateAutoCompleteFor(event) {
+  var input = event.target;
+
+  var value = input.value;
+  console.log(value);
+
+  getAutoCompleteFor('New Zealand, ' + value)
+    .then(r => {
+      var listId = input.getAttribute('list');
+      var datalist = document.getElementById(listId);
+
+      var newData = datalist.cloneNode(false);
+
+      if (r.suggestions) {
+        r.suggestions.forEach(item => {
+          console.log(item);
+
+          var node = document.createElement('option');
+          node.setAttribute('value', item.label);
+          node.setAttribute('location', item.locationId);
+
+          newData.appendChild(node);
+        });
+      }
+
+      // insert into the DOM
+      datalist.parentNode.replaceChild(newData ,datalist);
+    });
+
+}
