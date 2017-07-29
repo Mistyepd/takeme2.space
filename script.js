@@ -130,14 +130,45 @@ function handleGetThere(event) {
       var bLatLong = pos[1];
 
 
-      var routeReqs = ["car", "publicTransport", "bicycle", "pedestrian"].map(mode =>
+      var modes = ["car", "publicTransport", "bicycle", "pedestrian"];
+
+      var routeReqs = modes.map(mode =>
         getRoute(aLatLong.Latitude, aLatLong.Longitude, bLatLong.Latitude, bLatLong.Longitude, mode)); 
 
       Promise.all(routeReqs)
-        .then(data => console.log(data));
+        .then(data => {
 
+          return data.map((item, elem) => {
+            console.log(elem);
+            console.log(item);
+
+            return constructRouteInfo(item, modes[elem]);
+          });
+        });
     });
+}
 
+function constructRouteInfo(route, mode) {
+  var info = {};
+
+  var summary = route.response.route[0].summary;
+  info.distance = summary.distance;
+  info.time = summary.travelTime;
+
+  if (mode === "car") {
+    info.emissions = (info.distance * 0.150).toFixed(2);
+  } else if (mode === "publicTransport") {
+    info.emissions = (info.distance * 0.098).toFixed(2);
+  }
+
+  if (mode === "pedestrian") {
+    info.caloriesBurned = (info.time *  3 ).toFixed(2) ;
+  } else if (mode === "bicycle") {
+    info.caloriesBurned = (info.time * 12.9 ).toFixed(2) ;
+  }
+
+  console.log(info);
+  return info;
 }
 
 
