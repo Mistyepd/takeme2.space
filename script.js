@@ -1,12 +1,19 @@
 
 /** 
+ * returns a promise of the resolved location ID to a location object
+ */
+function resolveLocationId(locationId) {
+  return fetch("https://geocoder.cit.api.here.com/6.2/geocode.json?locationid=" + locationId
+    + "&app_id=" + HERE_APP_ID + "&app_code=" + HERE_APP_CODE + "&gen=9")
+    .then(r => r.json());
+}
+
+/**
  * returns a promise of the long & lat of a location ID
  */
 function getLongLat(locationId) {
-  return fetch("https://geocoder.cit.api.here.com/6.2/geocode.json?locationid=" + locationId
-    + "&app_id=" + HERE_APP_ID + "&app_code=" + HERE_APP_CODE + "&gen=9")
-    .then(r => r.json())
-    .then(r => r.Response.View[0].Result[0].Location.DisplayPosition);
+  return resolveLocationId(locationId)
+  .then(r => r.Response.View[0].Result[0].Location.DisplayPosition);
 }
 
 function getRoute(StartX, StartY, GoalX, GoalY, mode) {
@@ -18,7 +25,6 @@ function getRoute(StartX, StartY, GoalX, GoalY, mode) {
     "&mode=fastest;" + mode + ";traffic:enabled")
     .then(r => r.json())
     .then(r => console.log(r));
-
 }
 
 function weather(name) {
@@ -62,4 +68,12 @@ function LatLongToMat(lat, long, zoom) {
   var yTile = n * (1-(Math.log(Math.tan(latRad) + 1/Math.cos(latRad)) /Math.PI)) / 2;
 
   return {column: xTile, row: yTile, zoom: zoom};
+}
+
+
+function getAutoCompleteFor(search) {
+
+  return fetch("http://autocomplete.geocoder.cit.api.here.com/6.2/suggest.json?app_id=" +
+    HERE_APP_ID + "&app_code=" + HERE_APP_CODE + "&query=" + search)
+    .then(r => r.json());
 }
