@@ -5,51 +5,92 @@
   <title>Take Me 2 Space</title>
   <link href="stylesheet.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-  </head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link href="../css/stylesheet.css" rel="stylesheet">
+</head>
+
 <body>
   <div id="logo-container"><h1>Take Me 2 Space</h1></div>
-
-  <div id="form-container">
-    <form class = "input-text">
-      <label>Point A </label><input type = "text" id = "point-a-input" list="point-a-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
+  <div id = "content-container">
+      <div id="form-container">
+          <form>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point A  &nbsp;</label><input type = "text" id = "point-a-input" list="point-a-input-list" oninput="updateAutoCompleteFor(event);"></br>
       <datalist id="point-a-input-list">
       </datalist>
-      <label>Point B </label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point B  &nbsp;</label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
       <datalist id="point-b-input-list">
       </datalist>
+              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Arrival Time </label>
+              <select id = "arrival-options"></select></br></br>
 
-      <label>Arrival Time </label>
-      <select id = "arrival-options">
-        <option value = "12:00PM">12:00PM</option>
-        <option value = "1:00PM">1:00PM</option>
-      </select>
-    </br></br>
+              <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span> How Many People? </label>
+              <select id = "num-person-options">
+                  <option value = "1">1</option>
+                  <option value = "2">2</option>
+                  <option value = "3">3</option>
+                  <option value = "4">4</option>
+                  <option value = "5">5</option>
+                  <option value = "6">6</option>
+                  <option value = "7">7</option>
+                  <option value = "8">8</option>
+              </select></br></br>
+              <button type="button" id="take-me-there-btn">Take Me There!</button></form></br></br>
+          </form>
+      </div>
 
-      <label>How Many People</label>
-      <select id = "num-person-options">
-        <option value = "1">1</option>
-        <option value = "2">2</option>
-        <option value = "3">3</option>
-      </select>
-    </br></br>
+      <div id="result-container">
+          <label>Order By </label>
+          <select>
+              <option value="Cost">Cost</option>
+              <option value="Emmissions">Emmissions</option>
+              <option value="Time">Time</option>
+          </select></br></br>
 
-      <button type="button" id="take-me-there-btn">Take Me There!</button>
-  </form>
-    <hr height="20px" width="50%"></br>
-  </div>
+          <div class = "result-list">
+              <div class = "left-container">
+                  <img src="bus.png" width ="150px" height ="150px">
+              </div>
+              <div class = "right-container">
+                  <p>Information 1</p>
+                  <p>Information 2</p>
+              </div>
+          </div>
 
-  <div id="result-container">
-    <label>Order By:</label>
-    <select>
-      <option value="Cost">Cost</option>
-      <option value="Emmissions">Emmissions</option>
-      <option value="Time">Time</option>
-    </select>
+          <div class = "result-list">
+              <div class = "left-container">
+                  <img src="bike.png" width ="150px" height ="150px">
+              </div>
+              <div class = "right-container">
+                  <p>Information 1</p>
+                  <p>Information 2</p>
+              </div>
+          </div>
 
-    <ul align="center" class = "result-list">
-      <li>Option 1</li>
-      <li>Option 2</li>
-    </ul>
+          <div class = "result-list">
+              <div class = "left-container">
+                  <img src="walk.png" width ="150px" height ="150px">
+              </div>
+              <div class = "right-container">
+                  <p>Information 1</p>
+                  <p>Information 2</p>
+                  <p>Information 3</p>
+              </div>
+          </div>
+
+          <div class = "result-list">
+              <div class = "left-container">
+                  <img src="car.png" width ="150px" height ="150px">
+              </div>
+              <div class = "right-container">
+                  <p>Information 1</p>
+                  <p>Information 2</p>
+                  <p>Information 3</p>
+                  <p>Information 4</p>
+              </div>
+          </div>
+
+      </div>
   </div>
 
   <div id="weather_api"></div>
@@ -61,5 +102,30 @@
     var WEATHER_APP_CODE = "vdbpJ6m0TAn3xzFySqVajA";
   </script>
   <script src="/script.js"></script>
+  <script>
+    // set up the arrival time options
+    var time = new Date();
+    var select = document.getElementById('arrival-options');
+    for (var i = 0; i <= 12; i++){
+        var opt = document.createElement('option');
+        var hour = time.getHours()+i;
+        opt.innerHTML = hour+":00";
+        if (hour >= 24 && hour-24 < 10){
+            opt.value = hour-24;
+            opt.innerHTML = "0"+(hour-24)+":00";
+        } else if (hour > 24 && hour-24 >= 10){
+            opt.value = hour-24;
+            opt.innerHTML = (hour-24)+":00";
+        } else if (hour < 10){
+            opt.value = hour;
+            opt.innerHTML = "0"+(hour)+":00";
+        } else if (hour >= 10 && hour+10 < 24){
+            opt.value = hour;
+            opt.innerHTML = (hour)+":00";
+        }
+        select.appendChild(opt);
+    }
+    console.log(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+  </script>
 </body>
 </html>
