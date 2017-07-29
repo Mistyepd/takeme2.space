@@ -14,83 +14,72 @@
   <div id="logo-container"><h1>Take Me 2 Space</h1></div>
 
   <div id = "content-container">
-  <div id="form-container">
-    <form>
-      <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point A  &nbsp;</label><input type = "text" id = "point-a-input"></br>
-      <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point B  &nbsp;</label><input type="text" id = "point-b-input"></br></br>
+      <div id="form-container">
+          <form>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point A  &nbsp;</label><input type = "text" id = "point-a-input"></br>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point B  &nbsp;</label><input type="text" id = "point-b-input"></br></br>
+              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Arrival Time </label>
+              <select id = "arrival-options"></select></br></br>
 
-      <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Arrival Time </label>
-      <select id = "arrival-options"></select>
-    </br></br>
+              <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span> How Many People? </label>
+              <select id = "num-person-options">
+                  <option value = "1">1</option>
+                  <option value = "2">2</option>
+                  <option value = "3">3</option>
+                  <option value = "4">4</option>
+                  <option value = "5">5</option>
+                  <option value = "6">6</option>
+                  <option value = "7">7</option>
+                  <option value = "8">8</option>
+              </select></br></br>
+              <button type="button" id="take-me-there-btn">Take Me There!</button></form></br></br>
+          </form>
+      </div>
 
-      <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span> How Many People? </label>
-      <select id = "num-person-options">
-        <option value = "1">1</option>
-        <option value = "2">2</option>
-        <option value = "3">3</option>
-        <option value = "4">4</option>
-        <option value = "5">5</option>
-        <option value = "6">6</option>
-        <option value = "7">7</option>
-        <option value = "8">8</option>
-      </select>
-    </br></br>
+      <div id="result-container">
+          <label>Order By </label>
+          <select>
+              <option value="Cost">Cost</option>
+              <option value="Emmissions">Emmissions</option>
+              <option value="Time">Time</option>
+          </select></br></br>
 
-      <button type="button" id="take-me-there-btn">Take Me There!</button></form></br></br>
-  </form>
-  </div>
+          <div class = "result-list">
+              <p><img src="bus.png" width ="150px" height ="150px"></p>
+              <p>Time travel</p>
+              <p>Cost</p>
+              <p>Information 3</p>
+              <p>Information 4</p>
+              <p>Information 5</p>
+          </div>
 
-  <div id="result-container">
-    <label>Order By </label>
-    <select>
-      <option value="Cost">Cost</option>
-      <option value="Emmissions">Emmissions</option>
-      <option value="Time">Time</option>
-    </select></br></br>
+          <div class = "result-list">
+              <p><img src="bike.png" width ="150px" height ="150px"></p>
+              <p>Time travel</p>
+              <p>Cost</p>
+              <p>Information 3</p>
+              <p>Information 4</p>
+              <p>Information 5</p>
+          </div>
 
+          <div class = "result-list">
+              <p><img src="walk.png" width ="150px" height ="150px"></p>
+              <p>Time travel</p>
+              <p>Cost</p>
+              <p>Information 3</p>
+              <p>Information 4</p>
+              <p>Information 5</p>
+          </div>
 
-    <div class = "result-list">
-        <p><img src="bus.png" width ="150px" height ="150px"></p>
-        <p>Time travel</p>
-        <p>Cost</p>
-        <p>Information 3</p>
-        <p>Information 4</p>
-        <p>Information 5</p>
-    </div>
-
-
-    <div class = "result-list">
-        <p><img src="bike.png" width ="150px" height ="150px"></p>
-        <p>Time travel</p>
-        <p>Cost</p>
-        <p>Information 3</p>
-        <p>Information 4</p>
-        <p>Information 5</p>
-    </div>
-
-
-    <div class = "result-list">
-        <p><img src="walk.png" width ="150px" height ="150px"></p>
-        <p>Time travel</p>
-        <p>Cost</p>
-        <p>Information 3</p>
-        <p>Information 4</p>
-        <p>Information 5</p>
-    </div>
-
-    <div class = "result-list">
-        <p><img src="car.png" width ="150px" height ="150px"></p>
-        <p>Time travel</p>
-        <p>Cost</p>
-        <p>Information 3</p>
-        <p>Information 4</p>
-        <p>Information 5</p>
-    </div>
-
-
-
-
-  <div>
+          <div class = "result-list">
+              <p><img src="car.png" width ="150px" height ="150px"></p>
+              <p>Time travel</p>
+              <p>Cost</p>
+              <p>Information 3</p>
+              <p>Information 4</p>
+              <p>Information 5</p>
+          </div>
+      </div>
   </div>
 
   <div id="weather_api"></div>
@@ -103,7 +92,6 @@
   </script>
   <script src="/script.js"></script>
   <script>
-
     // set up the arrival time options
     var time = new Date();
     var select = document.getElementById('arrival-options');
