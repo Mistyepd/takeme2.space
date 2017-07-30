@@ -16,12 +16,13 @@ function getLongLat(locationId) {
   .then(r => r.Response.View[0].Result[0].Location.DisplayPosition);
 }
 
-function getRoute(StartX, StartY, GoalX, GoalY, mode) {
+function getRoute(StartX, StartY, GoalX, GoalY, mode, arrival) {
   return fetch("https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=" + HERE_APP_ID +
     "&app_code=" + HERE_APP_CODE +
     "&waypoint0=geo!" + StartX + "," + StartY +
     "&waypoint1=geo!" + GoalX + "," + GoalY +
-    "&mode=fastest;" + mode + ";traffic:enabled")
+    "&mode=fastest;" + mode + ";traffic:enabled" +
+    "&departure=" + arrival )
     .then(r => r.json());
 }
 
@@ -120,6 +121,15 @@ function handleGetThere(event) {
   var aLocId = getLocationIdFromDataList(aLocation.value, aLocation.getAttribute('list'))
   var bLocId = getLocationIdFromDataList(bLocation.value, bLocation.getAttribute('list'))
 
+  var arrivalOption = document.getElementById('arrival-options');
+
+  console.log(arrivalOption.value);
+
+  var arrival = new Date();
+  arrival.setHours(parseInt(arrivalOption.value));
+  arrival.setMinutes(0);
+
+  console.log(arrival);
   
   Promise.all([getLongLat(aLocId), getLongLat(bLocId)])
     .then(pos => {
@@ -130,14 +140,45 @@ function handleGetThere(event) {
       var bLatLong = pos[1];
 
 
-      var routeReqs = ["car", "publicTransport", "bicycle", "pedestrian"].map(mode =>
-        getRoute(aLatLong.Latitude, aLatLong.Longitude, bLatLong.Latitude, bLatLong.Longitude, mode)); 
+      var modes = ["car", "publicTransport", "bicycle", "pedestrian"];
+
+      var routeReqs = modes.map(mode =>
+        getRoute(aLatLong.Latitude, aLatLong.Longitude, bLatLong.Latitude, bLatLong.Longitude, mode, arrival.toISOString())); 
 
       Promise.all(routeReqs)
-        .then(data => console.log(data));
+        .then(data => {
 
+          return data.map((item, elem) => {
+            console.log(elem);
+            console.log(item);
+
+            return constructRouteInfo(item, modes[elem]);
+          });
+        });
     });
+}
 
+function constructRouteInfo(route, mode) {
+  var info = {};
+
+  var summary = route.response.route[0].summary;
+  info.distance = summary.distance;
+  info.time = summary.travelTime;
+
+  if (mode === "car") {
+    info.emissions = (info.distance * 0.150).toFixed(2);
+  } else if (mode === "publicTransport") {
+    info.emissions = (info.distance * 0.098).toFixed(2);
+  }
+
+  if (mode === "pedestrian") {
+    info.caloriesBurned = (info.time *  3 ).toFixed(2) ;
+  } else if (mode === "bicycle") {
+    info.caloriesBurned = (info.time * 12.9 ).toFixed(2) ;
+  }
+
+  console.log(info);
+  return info;
 }
 
 

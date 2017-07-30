@@ -28,7 +28,7 @@
               <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> From  &nbsp;</label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
       <datalist id="point-b-input-list">
       </datalist>
-              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Arrival Time </label>
+              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Departure Time </label>
               <select id = "arrival-options"></select></br></br>
 
               <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span> How Many People? </label>
@@ -113,21 +113,20 @@
     // set up the arrival time options
     var time = new Date();
     var select = document.getElementById('arrival-options');
-    for (var i = 0; i <= 12; i++){
+    for (var i = 1; i <= 13; i++){
         var opt = document.createElement('option');
         var hour = time.getHours()+i;
         opt.innerHTML = hour+":00";
-        if (hour >= 24 && hour-24 < 10){
-            opt.value = hour-24;
-            opt.innerHTML = "0"+(hour-24)+":00";
-        } else if (hour > 24 && hour-24 >= 10){
-            opt.value = hour-24;
-            opt.innerHTML = (hour-24)+":00";
+        opt.value = hour;
+        if (hour >= 23 && hour-23 < 10){
+            opt.value = hour-23;
+            opt.innerHTML = "0"+(hour-23)+":00";
+        } else if (hour > 23 && hour-23 >= 10){
+            opt.value = hour-23;
+            opt.innerHTML = (hour-23)+":00";
         } else if (hour < 10){
-            opt.value = hour;
             opt.innerHTML = "0"+(hour)+":00";
-        } else if (hour >= 10 && hour+10 < 24){
-            opt.value = hour;
+        } else if (hour >= 10 && hour+10 < 23){
             opt.innerHTML = (hour)+":00";
         }
         select.appendChild(opt);
