@@ -108,10 +108,15 @@ function updateAutoCompleteFor(event) {
 
 }
 
+var Route_Found = null;
 
 function handleGetThere(event) {
   console.log(event);
-  buildOptions('options-container'); 
+  Route_Found = null;
+  getRoutes().then(routes => {
+    Route_Found = routes;
+    buildOptions('options-container'); 
+  });
 }
 
 function getRoutes() {
@@ -222,70 +227,71 @@ function buildOptions(containerId) {
   var containerOld = document.getElementById(containerId);
   var container = containerOld.cloneNode(false); 
 
-  getRoutes().then(routes => {
+  // sort via order
+  var orderOption = document.getElementById('filter-order');
+  var sortBy = orderOption.value;
 
-    // sort via order
-    var orderOption = document.getElementById('filter-order');
-    var sortBy = orderOption.value;
+  if (Route_Found === null) {
+    return;
+  }
 
-    routes = routes.sort((left, right) => {
-      return left[sortBy] >= right[sortBy];
-    });
-
-    routes.forEach(route => {
-      var result = document.createElement('div');
-      result.setAttribute('class', 'result-list');
-
-      var leftContainer = document.createElement('div');
-      leftContainer.setAttribute('class', 'left-container');
-
-      var transportImg = document.createElement('img');
-      transportImg.setAttribute('src', route.image);
-      transportImg.setAttribute('width', '150px');
-      transportImg.setAttribute('height', '150px');
-
-      leftContainer.appendChild(transportImg);
-      result.appendChild(leftContainer);
-
-      var rightContainer = document.createElement('div');
-      rightContainer.setAttribute('class', 'right-container');
-
-
-      ["time", "distance", "emissions"].forEach(data => {
-        if (route[data]) {
-          var info = document.createElement('p');
-          
-          var text = "PUT TEXT IN ME PLZ";
-          if (data === "time") {
-            text = (route[data] / 3600).toFixed(2) + "hr";
-          } else if (data === "distance"){
-            text = (route[data] / 1000).toFixed(2) + "Km";
-          } else if (data === "emissions") {
-            text = (route[data]).toFixed(2) + " grams of CO2";
-          }
-
-          console.log(route[data] + " => " + text);
-          info.appendChild(document.createTextNode(text));
-          rightContainer.appendChild(info);
-        }
-      });
-
-      result.appendChild(rightContainer);
-
-      // <div class = "result-list">
-      //     <div class = "left-container">
-      //         <img src="bike.png" width ="150px" height ="150px">
-      //     </div>
-      //     <div class = "right-container">
-      //         <p>Information 1</p>
-      //         <p>Information 2</p>
-      //     </div>
-      // </div>
-      container.appendChild(result);
-    });
-
-    containerOld.parentNode.replaceChild(container, containerOld);
+  var routes = Route_Found.sort((left, right) => {
+    return left[sortBy] >= right[sortBy];
   });
+
+  routes.forEach(route => {
+    var result = document.createElement('div');
+    result.setAttribute('class', 'result-list');
+
+    var leftContainer = document.createElement('div');
+    leftContainer.setAttribute('class', 'left-container');
+
+    var transportImg = document.createElement('img');
+    transportImg.setAttribute('src', route.image);
+    transportImg.setAttribute('width', '150px');
+    transportImg.setAttribute('height', '150px');
+
+    leftContainer.appendChild(transportImg);
+    result.appendChild(leftContainer);
+
+    var rightContainer = document.createElement('div');
+    rightContainer.setAttribute('class', 'right-container');
+
+
+    ["time", "distance", "emissions"].forEach(data => {
+      if (route[data]) {
+        var info = document.createElement('p');
+
+        var text = "PUT TEXT IN ME PLZ";
+        if (data === "time") {
+          text = (route[data] / 3600).toFixed(2) + "hr";
+        } else if (data === "distance"){
+          text = (route[data] / 1000).toFixed(2) + "Km";
+        } else if (data === "emissions") {
+          text = (route[data]).toFixed(2) + " grams of CO2";
+        }
+
+        console.log(route[data] + " => " + text);
+        info.appendChild(document.createTextNode(text));
+        rightContainer.appendChild(info);
+      }
+    });
+
+    result.appendChild(rightContainer);
+
+    // <div class = "result-list">
+    //     <div class = "left-container">
+    //         <img src="bike.png" width ="150px" height ="150px">
+    //     </div>
+    //     <div class = "right-container">
+    //         <p>Information 1</p>
+    //         <p>Information 2</p>
+    //     </div>
+    // </div>
+    container.appendChild(result);
+  });
+
+  containerOld.parentNode.replaceChild(container, containerOld);
 }
 
 function handleFilter(event) {
