@@ -6,16 +6,6 @@ body{
   display: grid;
 }
 
-h1{
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 65px;
-  font-style: italic;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
 input {
   width: 50%;
   height: 28px;
@@ -52,17 +42,6 @@ button:hover{
   color: white;
   padding-top: 50px;
   padding-bottom: 50px;
-}
-
-.logo-left {
-  max-width: 50%;
-  float: inherit;
-  display: inline-block;
-}
-
-.logo-right {
-  max-width: 50%;
-  float: right;
 }
 
 #content-container{
