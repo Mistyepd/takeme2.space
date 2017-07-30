@@ -27,7 +27,6 @@ function getRoute(StartX, StartY, GoalX, GoalY, mode, arrival) {
 }
 
 function weather(name) {
-
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = "https://weather.cit.api.here.com/weather/1.0/report.json?app_id=" + WEATHER_APP_ID +
@@ -39,8 +38,10 @@ function weather(name) {
 }
 
 function weatherCallBack(data) {
-  console.log(data);
+  CURRENT_WEATHER = data;
 }
+
+weather("Wellington City");
 
 function getTrafficIncidents(lat, long) {
   var prox = 7152;
@@ -111,11 +112,11 @@ function updateAutoCompleteFor(event) {
 var Route_Found = null;
 
 function handleGetThere(event) {
-  document.getElementById('result-container').style.display = 'block';
   console.log(event);
   Route_Found = null;
   getRoutes().then(routes => {
     Route_Found = routes;
+    document.getElementById('result-container').style.display = 'block';
     buildOptions('options-container'); 
   });
 }
@@ -258,6 +259,25 @@ function buildOptions(containerId) {
     var rightContainer = document.createElement('div');
     rightContainer.setAttribute('class', 'right-container');
 
+    if (route.mode === 'bicycle') {
+      console.log(CURRENT_WEATHER);
+      var obs = CURRENT_WEATHER.observations.location[0].observation[0];
+
+      var flavour = document.createElement('p');
+      var text = "Wind: " +  obs.windDescShort + " " + obs.windSpeed + "km/h";
+      flavour.appendChild(document.createTextNode(text));
+      rightContainer.appendChild(flavour);
+    }
+    if (route.mode === 'pedestrian') {
+      console.log(CURRENT_WEATHER);
+      var obs = CURRENT_WEATHER.observations.location[0].observation[0];
+
+      var flavour = document.createElement('p');
+      var text = "Weather: " + obs.skyDescription +  ", " +  obs.temperature + "℃" ;
+      flavour.appendChild(document.createTextNode(text));
+      rightContainer.appendChild(flavour);
+    }
+
 
     ["time", "distance", "emissions"].forEach(data => {
       if (route[data]) {
@@ -265,11 +285,11 @@ function buildOptions(containerId) {
 
         var text = "PUT TEXT IN ME PLZ";
         if (data === "time") {
-          text = (route[data] / 3600).toFixed(2) + "hr";
+          text = "Time: " +  (route[data] / 3600).toFixed(2) + "hr";
         } else if (data === "distance"){
-          text = (route[data] / 1000).toFixed(2) + "Km";
+          text = "Distance: " + (route[data] / 1000).toFixed(2) + "Km";
         } else if (data === "emissions") {
-          text = (route[data]).toFixed(2) + " grams of CO2";
+          text = "Emissions: " + (route[data]).toFixed(2) + " grams of CO₂";
         }
 
         console.log(route[data] + " => " + text);
