@@ -69,7 +69,14 @@ button:hover{
   text-align: center;
 }
 
+#padding{
+  position: relative;
+  height: 70%;
+  left: 15%;
+}
+
 #result-container{
+  display: none;
   position: relative;
   width: 70%;
   left: 15%;
