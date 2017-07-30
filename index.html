@@ -1,1 +1,84 @@
-<h1>Take Me 2 Space</h1>
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Take Me To Space</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="stylesheet.css" rel="stylesheet">  
+  
+</head>
+
+<body>
+  <div id="logo-container">
+      <img src="logo2.png" width ="800px" height ="200px">
+  </div>
+  </div>
+  <div id = "content-container">
+      <div id="form-container">
+          <form>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Take me to  &nbsp;</label><input type = "text" id = "point-a-input" list="point-a-input-list" oninput="updateAutoCompleteFor(event);"></br>
+      <datalist id="point-a-input-list">
+      </datalist>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> From  &nbsp;</label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
+      <datalist id="point-b-input-list">
+      </datalist>
+              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Leave at </label>
+              <select id = "arrival-options"></select></br></br>
+
+              <button type="button" id="take-me-there-btn" onclick="handleGetThere(event);" >Take Me There!</button></form></br></br>
+          </form>
+      </div>
+
+      <div id="result-container">
+
+          <label>I care about </label>
+          <select id="filter-order" onchange="handleFilter(event);" >
+              <option value="time">Time</option>
+              <option value="emissions">Emissions</option>
+              <option value="distance">Distance</option>
+
+          </select></br></br>
+
+          <div id="options-container">
+          </div>
+
+      </div>
+  </div>
+
+  <div id="weather_api"></div>
+  <script text="text/javascript">
+    var HERE_APP_ID   = "OhyirZysFFjdv8Qzsq2A";
+    var HERE_APP_CODE = "TzRKd-0kRlgnZw_mh6bIIA";
+
+    var WEATHER_APP_ID = "6FBqgI3RgOK4Uup663JI";
+    var WEATHER_APP_CODE = "vdbpJ6m0TAn3xzFySqVajA";
+  </script>
+  <script src="/script.js"></script>
+  <script>
+    // set up the arrival time options
+    var time = new Date();
+    var select = document.getElementById('arrival-options');
+    for (var i = 1; i <= 13; i++){
+        var opt = document.createElement('option');
+        var hour = time.getHours()+i;
+        opt.innerHTML = hour+":00";
+        opt.value = hour;
+        if (hour >= 23 && hour-23 < 10){
+            opt.value = hour-23;
+            opt.innerHTML = "0"+(hour-23)+":00";
+        } else if (hour > 23 && hour-23 >= 10){
+            opt.value = hour-23;
+            opt.innerHTML = (hour-23)+":00";
+        } else if (hour < 10){
+            opt.innerHTML = "0"+(hour)+":00";
+        } else if (hour >= 10 && hour+10 < 23){
+            opt.innerHTML = (hour)+":00";
+        }
+        select.appendChild(opt);
+    }
+    console.log(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+  </script>
+</body>
+</html>
