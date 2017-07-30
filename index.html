@@ -28,26 +28,15 @@
               <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> From  &nbsp;</label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
       <datalist id="point-b-input-list">
       </datalist>
-              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Departure Time </label>
+              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Leave at </label>
               <select id = "arrival-options"></select></br></br>
 
-              <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span> How Many People? </label>
-              <select id = "num-person-options">
-                  <option value = "1">1</option>
-                  <option value = "2">2</option>
-                  <option value = "3">3</option>
-                  <option value = "4">4</option>
-                  <option value = "5">5</option>
-                  <option value = "6">6</option>
-                  <option value = "7">7</option>
-                  <option value = "8">8</option>
-              </select></br></br>
               <button type="button" id="take-me-there-btn" onclick="handleGetThere(event);" >Take Me There!</button></form></br></br>
           </form>
       </div>
 
       <div id="result-container">
-          <label>Order By </label>
+          <label>I care about </label>
           <select>
               <option value="Cost">Cost</option>
               <option value="Emmissions">Emmissions</option>
