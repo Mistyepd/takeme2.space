@@ -2,49 +2,43 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Take Me 2 Space</title>
-  <link href="stylesheet.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <title>Take Me To Space</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-   <link href="../css/stylesheet.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="stylesheet.css" rel="stylesheet">  
+  
 </head>
 
 <body>
-  <div id="logo-container"><h1>Take Me 2 Space</h1></div>
+  <div id="logo-container">
+      <img src="logo2.png" width ="800px" height ="200px">
+  </div>
+  </div>
   <div id = "content-container">
       <div id="form-container">
           <form>
-              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point A  &nbsp;</label><input type = "text" id = "point-a-input" list="point-a-input-list" oninput="updateAutoCompleteFor(event);"></br>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Take me to  &nbsp;</label><input type = "text" id = "point-a-input" list="point-a-input-list" oninput="updateAutoCompleteFor(event);"></br>
       <datalist id="point-a-input-list">
       </datalist>
-              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Point B  &nbsp;</label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
+              <label><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> From  &nbsp;</label><input type="text" id = "point-b-input" list="point-b-input-list" oninput="updateAutoCompleteFor(event);" ></br></br>
       <datalist id="point-b-input-list">
       </datalist>
-              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Departure Time </label>
+              <label><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Leave at </label>
               <select id = "arrival-options"></select></br></br>
 
-              <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span> How Many People? </label>
-              <select id = "num-person-options">
-                  <option value = "1">1</option>
-                  <option value = "2">2</option>
-                  <option value = "3">3</option>
-                  <option value = "4">4</option>
-                  <option value = "5">5</option>
-                  <option value = "6">6</option>
-                  <option value = "7">7</option>
-                  <option value = "8">8</option>
-              </select></br></br>
               <button type="button" id="take-me-there-btn" onclick="handleGetThere(event);" >Take Me There!</button></form></br></br>
           </form>
       </div>
 
       <div id="result-container">
-          <label>Order By </label>
+
+          <label>I care about </label>
           <select id="filter-order" onchange="handleFilter(event);" >
               <option value="time">Time</option>
               <option value="emissions">Emissions</option>
               <option value="distance">Distance</option>
+
           </select></br></br>
 
           <div id="options-container">

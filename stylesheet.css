@@ -1,11 +1,8 @@
-body, h1{
-  font-family: 'Raleway', sans-serif;
+body{
+  font-family: 'Open Sans', sans-serif;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-}
-
-body{
   display: grid;
 }
 
@@ -29,8 +26,8 @@ ul {
 button {
   padding: 10px 20px 10px 20px;
   background-color:#fcc800;
-  border:none;
   color:#3f3f3f;
+  border: none;
   font-size: 1.0em;
   width: 58%;
 }
@@ -39,8 +36,13 @@ button:hover{
  background-color:#F4A545;
 }
 
+#take-me-there-btn{
+  border-radius: 8px;
+}
+
 #logo-container{
-  background-color: black;
+  position: relative;
+  background-color: #2A90F2;
   color: white;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -79,6 +81,7 @@ hr {
 }
 
 .result-list{
+  border-radius: 8px;
   border-style: solid;
   border-width: 1px;
   margin-bottom: 8px;
