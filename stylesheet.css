@@ -95,14 +95,16 @@ hr {
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .left-container{
-  float: inherit;
-  padding-right: 50px;
-  padding-bottom: 10px;
-  max-width: 20%;
-  display: inline-block;
+  /* float: inherit; */
+  /* padding-right: 50px; */
+  /* padding-bottom: 10px; */
+  /* max-width: 20%; */
+  /* display: inline-block; */
 }
 
 .left-container img{
@@ -111,11 +113,11 @@ hr {
 }
 
 .right-container{
-    padding-top: 15px;
-    margin-right: 30%;
-    float: right;
-    min-width: 40%;
-    font-size: 0.8em;
+    /* padding-top: 15px; */
+    /* margin-right: 30%; */
+    /* float: right; */
+    /* min-width: 40%; */
+    /* font-size: 0.8em; */
 }
 
 #ty-footer{    
