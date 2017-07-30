@@ -111,6 +111,7 @@ function updateAutoCompleteFor(event) {
 var Route_Found = null;
 
 function handleGetThere(event) {
+  document.getElementById('result-container').style.display = 'block';
   console.log(event);
   Route_Found = null;
   getRoutes().then(routes => {

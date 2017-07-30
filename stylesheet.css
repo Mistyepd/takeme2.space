@@ -76,6 +76,7 @@ button:hover{
 }
 
 #result-container{
+  display: none;
   position: relative;
   width: 70%;
   left: 15%;
