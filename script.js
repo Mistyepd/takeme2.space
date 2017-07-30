@@ -224,6 +224,14 @@ function buildOptions(containerId) {
 
   getRoutes().then(routes => {
 
+    // sort via order
+    var orderOption = document.getElementById('filter-order');
+    var sortBy = orderOption.value;
+
+    routes = routes.sort((left, right) => {
+      return left[sortBy] >= right[sortBy];
+    });
+
     routes.forEach(route => {
       var result = document.createElement('div');
       result.setAttribute('class', 'result-list');
@@ -278,4 +286,10 @@ function buildOptions(containerId) {
 
     containerOld.parentNode.replaceChild(container, containerOld);
   });
+}
+
+function handleFilter(event) {
+  console.log(event.target.value);
+
+  buildOptions('options-container'); 
 }

@@ -41,10 +41,10 @@
 
       <div id="result-container">
           <label>Order By </label>
-          <select>
-              <option value="Cost">Cost</option>
-              <option value="Emmissions">Emmissions</option>
-              <option value="Time">Time</option>
+          <select id="filter-order" onchange="handleFilter(event);" >
+              <option value="time">Time</option>
+              <option value="emissions">Emissions</option>
+              <option value="distance">Distance</option>
           </select></br></br>
 
           <div id="options-container">
