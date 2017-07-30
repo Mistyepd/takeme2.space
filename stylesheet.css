@@ -26,14 +26,18 @@ ul {
 button {
   padding: 10px 20px 10px 20px;
   background-color:#fcc800;
-  border:none;
   color:#3f3f3f;
+  border: none;
   font-size: 1.0em;
   width: 58%;
 }
 
 button:hover{
  background-color:#F4A545;
+}
+
+#take-me-there-btn{
+  border-radius: 8px;
 }
 
 #logo-container{
@@ -77,6 +81,7 @@ hr {
 }
 
 .result-list{
+  border-radius: 8px;
   border-style: solid;
   border-width: 1px;
   margin-bottom: 8px;
