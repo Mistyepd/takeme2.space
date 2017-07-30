@@ -4,6 +4,7 @@ body{
   margin-right: auto;
   text-align: center;
   display: grid;
+  background-color: #fafafa;
 }
 
 input {
@@ -54,7 +55,6 @@ button:hover{
   padding-bottom: 50px;
   padding-left: 50px;
   padding-right: 50px;
-  background-color: #fafafa;
   width: 80%;
   position: relative;
   text-align: left;
