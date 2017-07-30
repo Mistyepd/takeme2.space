@@ -32,54 +32,58 @@
       </div>
 
       <div id="result-container">
+
           <label>I care about </label>
-          <select>
-              <option value="Cost">Cost</option>
-              <option value="Emmissions">Emmissions</option>
-              <option value="Time">Time</option>
+          <select id="filter-order" onchange="handleFilter(event);" >
+              <option value="time">Time</option>
+              <option value="emissions">Emissions</option>
+              <option value="distance">Distance</option>
+
           </select></br></br>
 
-          <div class = "result-list">
+          <div id="options-container">
+            <div class = "result-list">
               <div class = "left-container">
-                  <img src="bus.png" width ="150px" height ="150px">
+                <img src="bus.png" width ="150px" height ="150px">
               </div>
               <div class = "right-container">
-                  <p>Information 1</p>
-                  <p>Information 2</p>
+                <p>Information 1</p>
+                <p>Information 2</p>
               </div>
-          </div>
+            </div>
 
-          <div class = "result-list">
+            <div class = "result-list">
               <div class = "left-container">
-                  <img src="bike.png" width ="150px" height ="150px">
+                <img src="bike.png" width ="150px" height ="150px">
               </div>
               <div class = "right-container">
-                  <p>Information 1</p>
-                  <p>Information 2</p>
+                <p>Information 1</p>
+                <p>Information 2</p>
               </div>
-          </div>
+            </div>
 
-          <div class = "result-list">
+            <div class = "result-list">
               <div class = "left-container">
-                  <img src="walk.png" width ="150px" height ="150px">
+                <img src="walk.png" width ="150px" height ="150px">
               </div>
               <div class = "right-container">
-                  <p>Information 1</p>
-                  <p>Information 2</p>
-                  <p>Information 3</p>
+                <p>Information 1</p>
+                <p>Information 2</p>
+                <p>Information 3</p>
               </div>
-          </div>
+            </div>
 
-          <div class = "result-list">
+            <div class = "result-list">
               <div class = "left-container">
-                  <img src="car.png" width ="150px" height ="150px">
+                <img src="car.png" width ="150px" height ="150px">
               </div>
               <div class = "right-container">
-                  <p>Information 1</p>
-                  <p>Information 2</p>
-                  <p>Information 3</p>
-                  <p>Information 4</p>
+                <p>Information 1</p>
+                <p>Information 2</p>
+                <p>Information 3</p>
+                <p>Information 4</p>
               </div>
+            </div>
           </div>
 
       </div>
